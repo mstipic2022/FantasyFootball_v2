@@ -19,11 +19,10 @@ public class PlayerController {
     private final PlayerService playerService;
     private final PlayerMapper playerMapper;
 
-    @GetMapping("/players")
+    @GetMapping(path = "/players")
     public @ResponseBody List<PlayerResponse> fetchPlayers() {
         log.info("fetchPlayers request received");
         String trackingId = MDC.get("trackingId");
-        //TODO why thiss???
         log.info("fetchPlayers trackingId={}", trackingId);
 
         List<PlayerFetchDto> fetchDtos = playerService.fetchPlayers();
