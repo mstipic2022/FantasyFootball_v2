@@ -1,0 +1,32 @@
+GET http://localhost:8080/api/player/v1/players
+
+###
+
+POST http://localhost:8080/api/player/v1
+Content-Type: application/json
+
+{
+  "name": "Andrej Kremlic",
+  "position": "CB",
+  "teamName": "Manchester United",
+  "price": 1970,
+  "points": 50
+}
+
+###
+
+PUT http://localhost:8080/api/player/v1/1
+Content-Type: application/json
+
+{
+  "name": "Petar Sucic",
+  "position": "ST",
+  "teamName": "Real Madrid",
+  "price": 4302.16,
+  "points": 100,
+  "version": 0
+}
+
+###
+
+DELETE http://localhost:8080/api/player/v1/1

@@ -1,11 +1,12 @@
 package footballfantasy.demo.player.service;
 
-import footballfantasy.demo.player.model.Player;
 import footballfantasy.demo.exception.CustomOptimisticLockException;
+import footballfantasy.demo.player.model.Player;
 import footballfantasy.demo.player.repository.PlayerRepository;
 import jakarta.persistence.OptimisticLockException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class    PlayerService {
         playerRepository.save(player);
     }
 
+    @Transactional
     public void updatePlayer(Long id, PlayerUpdateDto playerUpdateDto) {
         try {
             Player player = playerRepository.findById(id).orElseThrow();
@@ -50,5 +52,9 @@ public class    PlayerService {
 
     public void deletePlayer(Long id) {
         playerRepository.deleteById(id);
+    }
+
+    public Player getPlayerById(Long playerId) {
+        return playerRepository.findById(playerId).orElseThrow();
     }
 }

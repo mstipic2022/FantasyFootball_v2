@@ -50,18 +50,21 @@ public class PlayerControllerTest {
     void testFetchPlayers() throws Exception {
 
         List<PlayerFetchDto> fetchDtos = Stream.of(
-                new PlayerFetchDto(1L, "Cristiano Ronaldo", Position.ST, "Real Madrid", 50000.00, 45),
-                new PlayerFetchDto(2L, "Luka Modric", Position.ST, "Manchester United", 3200.50, 70)
+                new PlayerFetchDto(1L, "Cristiano Ronaldo", Position.ST, "Real Madrid",
+                        50000.00, 45, 1L),
+                new PlayerFetchDto(2L, "Luka Modric", Position.ST, "Manchester United",
+                        3200.50, 70, 1L)
         ).collect(Collectors.toList());
 
         List<PlayerResponse> responses = fetchDtos.stream()
-                .map(dto -> new PlayerResponse(dto.id(), dto.name(), dto.position(), dto.teamName(), dto.price(), dto.points()))
-                .toList();
+                .map(dto -> new PlayerResponse(dto.id(), dto.name(), dto.position(), dto.teamName(),
+                        dto.price(), dto.points(), dto.version())).toList();
 
         when(playerService.fetchPlayers()).thenReturn(fetchDtos);
         when(playerMapper.map(any(PlayerFetchDto.class))).thenAnswer(invocation -> {
             PlayerFetchDto dto = invocation.getArgument(0);
-            return new PlayerResponse(dto.id(), dto.name(), dto.position(), dto.teamName(), dto.price(), dto.points());
+            return new PlayerResponse(dto.id(), dto.name(), dto.position(), dto.teamName(),
+                    dto.price(), dto.points(), dto.version());
         });
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/player/v1/players")
@@ -71,7 +74,8 @@ public class PlayerControllerTest {
 
     @Test
     void testCreatePlayerRequest() throws Exception {
-        PlayerCreateRequest request = new PlayerCreateRequest("Ivan Perisic", Position.RW, "Bayern FC", 543.23, 60);
+        PlayerCreateRequest request = new PlayerCreateRequest("Ivan Perisic", Position.RW,
+                "Bayern FC", 543.23, 60);
 
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/player/v1")
@@ -86,7 +90,8 @@ public class PlayerControllerTest {
     @Test
     void testUpdatePlayer() throws Exception {
 
-        PlayerUpdateRequest request = new PlayerUpdateRequest("Lionel Messi", Position.ST, "Bayern FC", 543.23, 60);
+        PlayerUpdateRequest request = new PlayerUpdateRequest("Lionel Messi", Position.ST, "Bayern FC",
+                543.23, 60, 1L);
 
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/player/v1/1")
