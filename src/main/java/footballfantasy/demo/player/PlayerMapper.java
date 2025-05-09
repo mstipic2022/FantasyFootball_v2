@@ -15,7 +15,6 @@ public final class PlayerMapper {
                 playerFetchDto.id(),
                 playerFetchDto.name(),
                 playerFetchDto.position(),
-                playerFetchDto.teamName(),
                 playerFetchDto.price(),
                 playerFetchDto.points(),
                 playerFetchDto.version());
@@ -25,7 +24,6 @@ public final class PlayerMapper {
         return new PlayerCreateDto(
                 playerCreateRequest.name(),
                 playerCreateRequest.position(),
-                playerCreateRequest.teamName(),
                 playerCreateRequest.price(),
                 playerCreateRequest.points());
     }
@@ -34,7 +32,6 @@ public final class PlayerMapper {
         return new PlayerUpdateDto(
                 playerUpdateRequest.name(),
                 playerUpdateRequest.position(),
-                playerUpdateRequest.teamName(),
                 playerUpdateRequest.price(),
                 playerUpdateRequest.points(),
                 playerUpdateRequest.version());

@@ -22,9 +22,6 @@ public class PlayerController {
     @GetMapping("/players")
     public @ResponseBody List<PlayerResponse> fetchPlayers() {
         log.info("fetchPlayers request received");
-        String trackingId = MDC.get("trackingId");
-        //TODO why thiss???
-        log.info("fetchPlayers trackingId={}", trackingId);
 
         List<PlayerFetchDto> fetchDtos = playerService.fetchPlayers();
         return fetchDtos.stream()
@@ -34,8 +31,6 @@ public class PlayerController {
 
     @PostMapping
     public void createPlayerRequest(@RequestBody PlayerCreateRequest playerCreateRequest) {
-        String trackingId = MDC.get("trackingId");
-        log.info("createPlayerRequest received request={}, trackingId={} ", playerCreateRequest, trackingId);
 
         var playerCreateDto = PlayerMapper.map(playerCreateRequest);
         playerService.createPlayer(playerCreateDto);
@@ -43,8 +38,6 @@ public class PlayerController {
 
     @PutMapping(path = "/{id}")
     public void updatePlayer(@PathVariable Long id, @RequestBody PlayerUpdateRequest playerUpdateRequest) {
-        String trackingId = MDC.get("trackingId");
-        log.info("updatePlayer received id={}, request={}, trackingId={} ", id, playerUpdateRequest, trackingId);
 
         var playerUpdateDto = PlayerMapper.map(playerUpdateRequest);
         playerService.updatePlayer(id, playerUpdateDto);
@@ -52,8 +45,6 @@ public class PlayerController {
 
     @DeleteMapping(path = "/{id}")
     public void deletePlayer(@PathVariable Long id) {
-        String trackingId = MDC.get("trackingId");
-        log.info("deletePlayer received id={}, trackingId={} ", id, trackingId);
         playerService.deletePlayer(id);
     }
 }

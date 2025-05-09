@@ -30,8 +30,6 @@ public class Player {
     @NotNull(message = "Position is required")
     @Enumerated(EnumType.STRING)
     private Position position;
-    //TODO why this??
-    private String teamName;
     private Double price;
     private Integer points;
 
@@ -47,10 +45,9 @@ public class Player {
     )
     private Set<Team> teams = new HashSet<>();
 
-    public Player(String name, Position position, String teamName, Double price, Integer points){
+    public Player(String name, Position position, Double price, Integer points){
         this.name = name;
         this.position = position;
-        this.teamName = teamName;
         this.price = price;
         this.points = points;
     }

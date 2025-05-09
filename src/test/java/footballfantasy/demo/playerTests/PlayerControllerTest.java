@@ -50,20 +50,20 @@ public class PlayerControllerTest {
     void testFetchPlayers() throws Exception {
 
         List<PlayerFetchDto> fetchDtos = Stream.of(
-                new PlayerFetchDto(1L, "Cristiano Ronaldo", Position.ST, "Real Madrid",
+                new PlayerFetchDto(1L, "Cristiano Ronaldo", Position.ST,
                         50000.00, 45, 1L),
-                new PlayerFetchDto(2L, "Luka Modric", Position.ST, "Manchester United",
+                new PlayerFetchDto(2L, "Luka Modric", Position.ST,
                         3200.50, 70, 1L)
         ).collect(Collectors.toList());
 
         List<PlayerResponse> responses = fetchDtos.stream()
-                .map(dto -> new PlayerResponse(dto.id(), dto.name(), dto.position(), dto.teamName(),
+                .map(dto -> new PlayerResponse(dto.id(), dto.name(), dto.position(),
                         dto.price(), dto.points(), dto.version())).toList();
 
         when(playerService.fetchPlayers()).thenReturn(fetchDtos);
         when(playerMapper.map(any(PlayerFetchDto.class))).thenAnswer(invocation -> {
             PlayerFetchDto dto = invocation.getArgument(0);
-            return new PlayerResponse(dto.id(), dto.name(), dto.position(), dto.teamName(),
+            return new PlayerResponse(dto.id(), dto.name(), dto.position(),
                     dto.price(), dto.points(), dto.version());
         });
 
@@ -74,8 +74,7 @@ public class PlayerControllerTest {
 
     @Test
     void testCreatePlayerRequest() throws Exception {
-        PlayerCreateRequest request = new PlayerCreateRequest("Ivan Perisic", Position.RW,
-                "Bayern FC", 543.23, 60);
+        PlayerCreateRequest request = new PlayerCreateRequest("Ivan Perisic", Position.RW, 543.23, 60);
 
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/player/v1")
@@ -90,7 +89,7 @@ public class PlayerControllerTest {
     @Test
     void testUpdatePlayer() throws Exception {
 
-        PlayerUpdateRequest request = new PlayerUpdateRequest("Lionel Messi", Position.ST, "Bayern FC",
+        PlayerUpdateRequest request = new PlayerUpdateRequest("Lionel Messi", Position.ST,
                 543.23, 60, 1L);
 
 

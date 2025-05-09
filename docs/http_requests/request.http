@@ -8,7 +8,6 @@ Content-Type: application/json
 {
   "name": "Andrej Kremlic",
   "position": "CB",
-  "teamName": "Manchester United",
   "price": 1970,
   "points": 50
 }
@@ -20,8 +19,7 @@ Content-Type: application/json
 
 {
   "name": "Petar Sucic",
-  "position": "ST",
-  "teamName": "Real Madrid",
+  "position": "FW",
   "price": 4302.16,
   "points": 100,
   "version": 0

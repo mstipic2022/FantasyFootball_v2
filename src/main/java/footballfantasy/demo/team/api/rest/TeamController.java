@@ -1,9 +1,6 @@
-package footballfantasy.demo.team.controller;
+package footballfantasy.demo.team.api.rest;
 
 import footballfantasy.demo.team.TeamMapper;
-import footballfantasy.demo.team.api.rest.TeamCreateRequest;
-import footballfantasy.demo.team.api.rest.TeamResponse;
-import footballfantasy.demo.team.api.rest.TeamUpdateRequest;
 import footballfantasy.demo.team.service.TeamCreateDto;
 import footballfantasy.demo.team.service.TeamFetchDto;
 import footballfantasy.demo.team.service.TeamService;
@@ -23,7 +20,7 @@ public class TeamController {
     private final TeamService teamService;
     private final TeamMapper teamMapper;
 
-    @GetMapping
+    @GetMapping("/teams")
     public ResponseEntity<List<TeamResponse>> getAllTeams() {
         List<TeamFetchDto> dtos = teamService.getAllTeams();
         return ResponseEntity.ok(dtos.stream()

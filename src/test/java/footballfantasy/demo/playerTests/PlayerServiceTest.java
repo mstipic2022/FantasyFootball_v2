@@ -34,8 +34,8 @@ public class PlayerServiceTest {
     @Test
     void testFetchPlayers() {
 
-        Player player1 = new Player("Luka Modric", Position.ST, "Real Madrid", 10000.0, 50);
-        Player player2 = new Player("Lionel Messi", Position.CM, "FC Barcelona", 50000.50, 75);
+        Player player1 = new Player("Luka Modric", Position.ST, 10000.0, 50);
+        Player player2 = new Player("Lionel Messi", Position.CM, 50000.50, 75);
 
         when(playerRepository.findAll()).thenReturn(List.of(player1, player2));
 
@@ -53,7 +53,7 @@ public class PlayerServiceTest {
     @Test
     void testCreatePlayer() {
 
-        PlayerCreateDto createDto = new PlayerCreateDto("Luka Modric", Position.ST, "Real Madrid",
+        PlayerCreateDto createDto = new PlayerCreateDto("Luka Modric", Position.ST,
                 10000.0, 50);
 
 
@@ -66,9 +66,9 @@ public class PlayerServiceTest {
     @Test
     void testUpdatePlayer() {
 
-        PlayerUpdateDto updateDto = new PlayerUpdateDto( "Luka Modric", Position.ST, "Real Madrid",
+        PlayerUpdateDto updateDto = new PlayerUpdateDto( "Luka Modric", Position.ST,
                 10000.0, 50, 1L);
-        Player player = new Player("Luka Modric", Position.ST, "Real Madrid", 10000.0, 50);
+        Player player = new Player("Luka Modric", Position.ST, 10000.0, 50);
 
         when(playerRepository.findById(1L)).thenReturn(Optional.of(player));
 
@@ -83,9 +83,9 @@ public class PlayerServiceTest {
     @Test
     void testUpdatePlayerOptimisticLockException() {
 
-        PlayerUpdateDto updateDto = new PlayerUpdateDto("Luka Modric", Position.ST, "Real Madrid",
+        PlayerUpdateDto updateDto = new PlayerUpdateDto("Luka Modric", Position.ST,
                 10000.0, 50, 1L);
-        Player player = new Player("Luka Modric", Position.ST, "Real Madrid", 10000.0, 50);
+        Player player = new Player("Luka Modric", Position.ST, 10000.0, 50);
 
         when(playerRepository.findById(1L)).thenReturn(Optional.of(player));
         doThrow(new jakarta.persistence.OptimisticLockException()).when(playerRepository).save(any(Player.class));

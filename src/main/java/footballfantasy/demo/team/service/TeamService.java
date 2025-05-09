@@ -1,17 +1,18 @@
 package footballfantasy.demo.team.service;
 
-import footballfantasy.demo.team.model.Team;
-import footballfantasy.demo.team.repository.TeamRepository;
 import footballfantasy.demo.player.service.PlayerService;
 import footballfantasy.demo.team.TeamMapper;
-import jakarta.transaction.Transactional;
+import footballfantasy.demo.team.model.Team;
+import footballfantasy.demo.team.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class TeamService {
 
     private final TeamRepository teamRepository;
@@ -71,4 +72,5 @@ public class TeamService {
         Team updated = teamRepository.save(team);
         return teamMapper.toFetchDto(updated);
     }
+
 }
